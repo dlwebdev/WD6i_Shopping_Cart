@@ -32,11 +32,15 @@ export class VendorsComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getProducts();
+  }
+
+  getProducts() {
     this._productService.getProducts()
-    .subscribe(Data => {
-      this.products = Data;
-      console.log(this.products);
-    });
+      .subscribe(Data => {
+        this.products = Data;
+        console.log(this.products);
+      });
     console.log(this.products);
   }
 
@@ -70,6 +74,11 @@ export class VendorsComponent implements OnInit {
   removeProduct(item: any) {
     console.log('Click!!', item._id);
     // Calling the removeProduct function from productService and passing item
-    this._productService.deleteItem(item);
+    this._productService.deleteItem(item)
+      .subscribe(deleteResp => {
+        console.log('Delete Resp: ', deleteResp);
+        // refresh products
+        this.getProducts();        
+      });
   }
 }
