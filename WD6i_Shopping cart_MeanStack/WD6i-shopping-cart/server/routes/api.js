@@ -133,6 +133,15 @@ router.get('/product/:id', function(req, res) {
     });
 });
 
+
+// Get one product by id
+router.delete('/product/:id', function(req, res) {
+    console.log('Deleting product with id of: ', req.params.id);
+    Product.remove({'_id': req.params.id}, (result) => {
+      res.json(result);
+    });
+});
+
 /****************************/
 /* POST Save Product Route. */
 /****************************/
@@ -179,7 +188,7 @@ router.put('/:id', function(req, res, next) {
       res.json(post);
     });
   });
-  
+
 
 /*******************************/
 /* Get all Item in cart Route. */
