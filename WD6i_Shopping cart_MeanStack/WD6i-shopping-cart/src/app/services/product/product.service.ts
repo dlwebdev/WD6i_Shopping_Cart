@@ -11,9 +11,9 @@ import 'rxjs/add/operator/toPromise';
 export class ProductService {
 
   private _getUrl = '/api/products';
-  private _postUrl = '/api/product-save';
-  private _updateUrl = '/api/update-product';
-  private _deleteUrl = '/api/product';
+  private _postUrl = '/api/product-save/';
+  private _updateUrl = '/api/update-product/';
+  private _deleteUrl = '/api/product/';
 
   constructor(private _http: Http) { }
 
@@ -40,7 +40,7 @@ export class ProductService {
 
   deleteItem(item: any) {
     console.log(item);
-    return this._http.get(this._deleteUrl + item._id, JSON.stringify(item))
+    return this._http.delete(this._deleteUrl + item._id, JSON.stringify(item))
       .map((response: Response) => response.json());
   }
 }
